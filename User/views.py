@@ -15,25 +15,25 @@ from django.shortcuts import get_object_or_404
 
 from .serializers import RegistrationSerializer, PasswordChangeSerializer
 # Create your views here.
-from . models import *
+from . models import  *
 from .serializers import *
 
 @api_view(['GET'])
 def display_users(request):
     # permission_classes = [IsAuthenticated, ]
-    data=MyUser.objects.all()                          
+    data=CustomUser.objects.all()                          
     serilaizer=UserSerializer(data,many=True)    
     return Response(serilaizer.data)
 
 @api_view(['GET'])
 def display_user(request,id):
-    data=get_object_or_404(MyUser,id=id)
+    data=get_object_or_404(CustomUser,id=id)
     serializer=UserSerializer(data).data        
     return Response(serializer)
 
 @api_view(['PUT'])
 def update_user(request,id):
-    data=get_object_or_404(MyUser,id=id)
+    data=get_object_or_404(CustomUser,id=id)
     serializer=UserSerializer(data,data=request.data)  
     if serializer.is_valid():
         serializer.save()
