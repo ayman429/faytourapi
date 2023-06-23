@@ -38,9 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    "testApi",
 
     'User',
+    'FayTourApp',
+
     'rest_framework',                # Django rest framework (drf)
     'rest_framework.authtoken',      # Adding token based authentication from drf
     'rest_auth',
