@@ -24,7 +24,7 @@ import datetime
 SECRET_KEY = 'django-insecure-(j=qywmf^@2uteh&=h=1c8ld9cbh@vpgsei^(g9!p+&4&hkgx='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -185,3 +185,15 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'FayTourApp@gmail.com'
 EMAIL_HOST_PASSWORD = 'lkiqdwbmjxugpnps'  # fayoum tour 2023
 EMAIL_PORT = 587
+
+
+# AWS S3:
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# Active - AKIATWV4RR6OEWESW7G2
+AWS_ACCESS_KEY_ID = 'AKIATWV4RR6OEWESW7G2'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'faytourimages'
+AWS_QUERYSTRING_AUTH = False
+
+# pip install boto3
+# pip install django-storages
