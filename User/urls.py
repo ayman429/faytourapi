@@ -4,7 +4,7 @@ from rest_framework_simplejwt import views as jwt_views
 # from dj_rest_auth.views import PasswordResetView,PasswordResetConfirmView
 
 
-app_name = 'users'
+app_name = 'User'
 
 urlpatterns = [
     
