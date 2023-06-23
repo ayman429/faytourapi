@@ -104,7 +104,7 @@ class viewTouristPlaces(viewsets.ModelViewSet):
                 }
                 return Response(json)
             # create:
-            except:    
+            except:
                 rating = RateTouristPlaces.objects.create(user=user,touristPlaces=touristPlaces,stars=stars)
                 serializer = RateTouristPlacesSerializer(rating,many = False)
                 json = {
@@ -119,22 +119,23 @@ class viewTouristPlaces(viewsets.ModelViewSet):
         json = []
         json2 = []
         max_average = 0
-        for obj in TouristPlaces.objects.all(): 
+        for obj in TouristPlaces.objects.all():
             average_stars =RateTouristPlaces.objects.filter(touristPlaces=obj).aggregate(Avg('stars'))['stars__avg']
             if average_stars is not None and average_stars > max_average:
                 max_average = average_stars
-        
-        for obj in TouristPlaces.objects.all(): 
+
+        for obj in TouristPlaces.objects.all():
             average_stars =RateTouristPlaces.objects.filter(touristPlaces=obj).aggregate(Avg('stars'))['stars__avg']
-            if average_stars is not None and average_stars == max_average:
+            if average_stars is not None and average_stars >= max_average-1:
                 json.append(obj.id)
- 
+
         for i in range(len(json)):
             TouristPlaces_by_rateNamber = TouristPlaces.objects.get(id = json[i])
             serializer = TouristPlacesSerializer(TouristPlaces_by_rateNamber)
             json2.append(serializer.data)
-        json2 = sorted(json2, key=lambda x: x['average_stars'], reverse=True)
-        return Response(json2) # , status=status.HTTP_200_OK
+        json2 = sorted(json2, key=lambda x: float(x['avg_ratings']), reverse=True)
+        return Response(json2)
+
 
 class viewHotel(viewsets.ModelViewSet):
 
@@ -217,7 +218,7 @@ class viewHotel(viewsets.ModelViewSet):
                 }
                 return Response(json)
             # create:
-            except:    
+            except:
                 rating = RateHotel.objects.create(user=user,hotel=hotel,stars=stars)
                 serializer = RateHotelSerializer(rating,many = False)
                 json = {
@@ -226,40 +227,30 @@ class viewHotel(viewsets.ModelViewSet):
                 }
                 return Response(json)
         return Response("json")
- 
+
     @action(detail=False, methods=['Get'])
     def searchRateNamber(self, request):
         json = []
         json2 = []
         max_average = 0
-        for obj in Hotel.objects.all(): 
-            average_stars =RateHotel.objects.filter(touristPlaces=obj).aggregate(Avg('stars'))['stars__avg']
+        for obj in Hotel.objects.all():
+            average_stars =RateHotel.objects.filter(hotel=obj).aggregate(Avg('stars'))['stars__avg']
             if average_stars is not None and average_stars > max_average:
                 max_average = average_stars
-        
-        for obj in Hotel.objects.all(): 
-            average_stars =RateHotel.objects.filter(touristPlaces=obj).aggregate(Avg('stars'))['stars__avg']
-            if average_stars is not None and average_stars == max_average:
+
+        for obj in Hotel.objects.all():
+            average_stars =RateHotel.objects.filter(hotel=obj).aggregate(Avg('stars'))['stars__avg']
+            if average_stars is not None and average_stars >= max_average-1:
                 json.append(obj.id)
- 
+
         for i in range(len(json)):
-            TouristPlaces_by_rateNamber = Hotel.objects.get(id = json[i])
-            serializer = HotelSerializer(TouristPlaces_by_rateNamber)
+            hotels_by_rateNamber = Hotel.objects.get(id = json[i])
+            serializer = HotelSerializer(hotels_by_rateNamber)
             json2.append(serializer.data)
+        json2 = sorted(json2, key=lambda x: float(x['avg_ratings']), reverse=True)
         return Response(json2)
-        # json = []
-        # json2 = []
-        # RateNamber = request.data['RateNamber']
-        # for obj in Hotel.objects.all(): 
-        #     if RateHotel.objects.filter(hotel=obj).aggregate(Avg('stars'))['stars__avg'] == float(RateNamber):
-        #         json.append(obj.id)
- 
-        # for i in range(len(json)):
-        #     hotels_by_rateNamber = Hotel.objects.get(id = json[i])
-        #     serializer = HotelSerializer(hotels_by_rateNamber)
-        #     json2.append(serializer.data)
-        # return Response(json2) # , status=status.HTTP_200_OK
-   
+
+
     # def get_serializer_class(self):
     #     return HotelSerializer
     
