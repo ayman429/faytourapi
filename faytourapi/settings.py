@@ -197,12 +197,12 @@ EMAIL_PORT = 587
 
 
 # AWS S3:
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# Active - AKIATWV4RR6OEWESW7G2
-AWS_ACCESS_KEY_ID = 'AKIA5DGVF4Z6QID2XG72'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'faytourapp'
-AWS_QUERYSTRING_AUTH = False
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# # Active - AKIATWV4RR6OEWESW7G2
+# AWS_ACCESS_KEY_ID = 'AKIA5DGVF4Z6QID2XG72'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'faytourapp'
+# AWS_QUERYSTRING_AUTH = False
 
 # pip install boto3
 # pip install django-storages
