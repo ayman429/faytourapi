@@ -15,6 +15,12 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Create your models here.
+def get_data_unique_filename(instance, filename):
+    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    filename, ext = os.path.splitext(filename)
+    unique_filename = f"{filename}_{timestamp}{ext}"
+    folder = "data"  
+    return os.path.join(folder, unique_filename)
 
 class TouristPlaces(models.Model):
     name = models.CharField(max_length=500,unique=True)
@@ -23,7 +29,7 @@ class TouristPlaces(models.Model):
     coordinatesX = models.FloatField() 
     coordinatesY = models.FloatField()
     address = models.CharField(max_length=100)
-    originalImage = models.ImageField(upload_to='image/%y/%m/%d')
+    originalImage = models.ImageField(upload_to=get_data_unique_filename)
     # video = models.FileField(upload_to='video',validators=[FileExtensionValidator(allowed_extensions=["mp4"])])
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
 
@@ -47,7 +53,7 @@ class Hotel(models.Model):
     description = models.TextField(default='')
     coordinatesX = models.FloatField(default=0.0)
     coordinatesY = models.FloatField(default=0.0)
-    originalImage = models.ImageField(upload_to='image')
+    originalImage = models.ImageField(upload_to=get_data_unique_filename)
     address = models.CharField(max_length=500)
     City = models.CharField(max_length=500)
     TotalBeds = models.IntegerField(default=0)
@@ -77,11 +83,11 @@ class Hotel(models.Model):
 
 class HotelsImages(models.Model):
     hotel = models.ForeignKey(Hotel,on_delete=models.CASCADE,related_name="images")
-    image = models.ImageField(upload_to="image",blank=True,unique=True)   
+    image = models.ImageField(upload_to=get_data_unique_filename,blank=True,unique=True)   
 
 class TourismImages(models.Model):
     touristPlaces = models.ForeignKey(TouristPlaces,on_delete=models.CASCADE,related_name="images")
-    image = models.ImageField(upload_to='image/%y/%m/%d',blank=True,unique=True) 
+    image = models.ImageField(upload_to=get_data_unique_filename,blank=True,unique=True) 
 
 class RateTouristPlaces(models.Model):
     touristPlaces = models.ForeignKey(TouristPlaces,on_delete=models.CASCADE)
@@ -116,7 +122,7 @@ def get_unique_filename(instance, filename):
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     filename, ext = os.path.splitext(filename)
     unique_filename = f"{filename}_{timestamp}{ext}"
-    folder = "image"  
+    folder = "posts"  
     return os.path.join(folder, unique_filename)
 
 class PostImages(models.Model):
