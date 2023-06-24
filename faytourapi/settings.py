@@ -24,7 +24,7 @@ import datetime
 SECRET_KEY = 'django-insecure-(j=qywmf^@2uteh&=h=1c8ld9cbh@vpgsei^(g9!p+&4&hkgx='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     # 'rest_auth.registration',
     'dj_rest_auth',
     "dj_rest_auth.registration",
+
+    'storages',
 
 
 ]
@@ -197,9 +199,9 @@ EMAIL_PORT = 587
 # AWS S3:
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # Active - AKIATWV4RR6OEWESW7G2
-AWS_ACCESS_KEY_ID = 'AKIATWV4RR6OEWESW7G2'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'faytourimages'
+AWS_ACCESS_KEY_ID = 'AKIA5DGVF4Z6QID2XG72'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'faytourapp'
 AWS_QUERYSTRING_AUTH = False
 
 # pip install boto3
