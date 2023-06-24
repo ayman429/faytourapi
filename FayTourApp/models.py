@@ -81,7 +81,7 @@ class HotelsImages(models.Model):
 
 class TourismImages(models.Model):
     touristPlaces = models.ForeignKey(TouristPlaces,on_delete=models.CASCADE,related_name="images")
-    image = models.ImageField(upload_to="image",blank=True,unique=True) 
+    image = models.ImageField(upload_to='image/%y/%m/%d',blank=True,unique=True) 
 
 class RateTouristPlaces(models.Model):
     touristPlaces = models.ForeignKey(TouristPlaces,on_delete=models.CASCADE)
