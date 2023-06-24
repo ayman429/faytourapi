@@ -1,1 +1,1 @@
-web: gunicorn faytourapi.wsgi --log-file -
+web: gunicorn faytourapi.wsgi --log-file - --timeout 1000
