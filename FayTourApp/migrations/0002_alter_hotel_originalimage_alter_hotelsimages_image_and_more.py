@@ -14,21 +14,21 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='hotel',
             name='originalImage',
-            field=models.ImageField(upload_to=FayTourApp.models.get_data_unique_filename),
+            field=models.ImageField(upload_to=FayTourApp.models.get_unique_filename),
         ),
         migrations.AlterField(
             model_name='hotelsimages',
             name='image',
-            field=models.ImageField(blank=True, unique=True, upload_to=FayTourApp.models.get_data_unique_filename),
+            field=models.ImageField(blank=True, unique=True, upload_to=FayTourApp.models.get_unique_filename),
         ),
         migrations.AlterField(
             model_name='tourismimages',
             name='image',
-            field=models.ImageField(blank=True, unique=True, upload_to=FayTourApp.models.get_data_unique_filename),
+            field=models.ImageField(blank=True, unique=True, upload_to=FayTourApp.models.get_unique_filename),
         ),
         migrations.AlterField(
             model_name='touristplaces',
             name='originalImage',
-            field=models.ImageField(upload_to=FayTourApp.models.get_data_unique_filename),
+            field=models.ImageField(upload_to=FayTourApp.models.get_unique_filename),
         ),
     ]

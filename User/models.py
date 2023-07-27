@@ -96,3 +96,6 @@ class CustomUser(AbstractBaseUser):
     def linkedin_signed_in(self):
 
         return bool(self.linkedin_token) and self.expiry_date > timezone.now()
+    
+
+    # error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username'
